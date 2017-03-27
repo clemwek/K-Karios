@@ -5,17 +5,17 @@
       <md-icon>more_vert</md-icon>
     </button>
     <md-menu #menu="mdMenu">
-      <button md-menu-item (click)="login()">
+      <button *ngIf="!(af.auth | async)" md-menu-item (click)="login()">
         <md-icon>fingerprint</md-icon>
         <span>Login</span>
       </button>
-      <button md-menu-item (click)="logout()">
+      <button *ngIf="(af.auth | async)" md-menu-item (click)="logout()">
         <md-icon>lock</md-icon>
         <span>Logout</span>
       </button>
-      <button md-menu-item>
+      <!--<button md-menu-item>
         <md-icon>notifications_off</md-icon>
         <span>Disable alerts</span>
-      </button>
+      </button>-->
     </md-menu>
 </md-toolbar>
