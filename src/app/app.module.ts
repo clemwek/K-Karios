@@ -32,7 +32,7 @@ export const firebaseConfig = {
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'staff', component: StaffComponent},
-  { path: 'sellStock', component: SellStockComponent }
+  { path: 'sellStock/:id', component: SellStockComponent }
 ]
 
 @NgModule({
