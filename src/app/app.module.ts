@@ -9,6 +9,7 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import 'hammerjs';
 
 import { FirebaseService } from './services/firebase.service';
+import { DateTimeService } from './services/date-time.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -52,7 +53,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    FirebaseService
+    FirebaseService,
+    DateTimeService
   ],
   bootstrap: [AppComponent]
 })
