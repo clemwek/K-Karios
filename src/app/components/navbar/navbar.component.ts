@@ -12,4 +12,8 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  test() {
+    console.log('Test test');
+  }
+
 }
