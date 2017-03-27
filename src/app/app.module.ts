@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { StaffComponent } from './components/staff/staff.component';
+import { SellStockComponent } from './components/sell-stock/sell-stock.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyCo98tJwrDrL6Zu1QIWf0NBb-klowGVnMs",
@@ -29,7 +30,8 @@ export const firebaseConfig = {
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
-  { path: 'staff', component: StaffComponent}
+  { path: 'staff', component: StaffComponent},
+  { path: 'sellStock', component: SellStockComponent }
 ]
 
 @NgModule({
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    StaffComponent
+    StaffComponent,
+    SellStockComponent
   ],
   imports: [
     BrowserModule,
