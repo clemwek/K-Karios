@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import 'hammerjs';
 
 import { FirebaseService } from './services/firebase.service';
@@ -20,6 +20,11 @@ export const firebaseConfig = {
     databaseURL: "https://new-restoke.firebaseio.com",
     storageBucket: "new-restoke.appspot.com",
     messagingSenderId: "963544826606"
+  };
+
+  const firebaseAuthConfig = {
+    provider: AuthProviders.Google,
+    method: AuthMethods.Popup
   };
 
 const appRoutes: Routes = [
@@ -39,7 +44,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     MaterialModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],

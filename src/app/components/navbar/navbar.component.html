@@ -5,11 +5,11 @@
       <md-icon>more_vert</md-icon>
     </button>
     <md-menu #menu="mdMenu">
-      <button md-menu-item>
+      <button md-menu-item (click)="login()">
         <md-icon>fingerprint</md-icon>
-        <span (click)="test()">Login</span>
+        <span>Login</span>
       </button>
-      <button md-menu-item>
+      <button md-menu-item (click)="logout()">
         <md-icon>lock</md-icon>
         <span>Logout</span>
       </button>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFire } from 'angularfire2';
 
 @Component({
   selector: 'app-navbar',
@@ -7,13 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public af:AngularFire
+  ) { }
 
   ngOnInit() {
   }
 
-  test() {
-    console.log('Test test');
+  login() {
+    console.log('this is clicked!!!');
+    this.af.auth.login();
+  }
+
+  logout() {
+    this.af.auth.logout();
   }
 
 }
