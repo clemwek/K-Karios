@@ -5,12 +5,22 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
+import { AngularFireModule } from 'angularfire2';
 import 'hammerjs';
 
+import { FirebaseService } from './services/firebase.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { StaffComponent } from './components/staff/staff.component';
+
+export const firebaseConfig = {
+    apiKey: "AIzaSyCo98tJwrDrL6Zu1QIWf0NBb-klowGVnMs",
+    authDomain: "new-restoke.firebaseapp.com",
+    databaseURL: "https://new-restoke.firebaseio.com",
+    storageBucket: "new-restoke.appspot.com",
+    messagingSenderId: "963544826606"
+  };
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -29,10 +39,13 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     BrowserAnimationsModule,
+    AngularFireModule.initializeApp(firebaseConfig),
     MaterialModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    FirebaseService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
