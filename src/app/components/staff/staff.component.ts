@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DateTimeService } from '../../services/date-time.service';
 import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
@@ -8,12 +9,18 @@ import { FirebaseService } from '../../services/firebase.service';
 })
 export class StaffComponent implements OnInit {
   something: any;
+  availableStock: any;
+  inServed: any;
+  pendingStock: any;
 
-  constructor(private firebaseService: FirebaseService) { }
+  constructor(
+    private firebaseService: FirebaseService,
+    private dateService:DateTimeService
+  ) { }
 
   ngOnInit() {
-    this.firebaseService.getSomething().subscribe(something => {
-      this.something = something;
+    this.firebaseService.getGenView('availableStock').subscribe(availableStock => {
+      this.availableStock = availableStock;
     } );
   }
 

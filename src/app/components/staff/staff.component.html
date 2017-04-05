@@ -19,73 +19,25 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>test data</td>
-              <td>test data</td>
-              <td>test data</td>
-              <td><button md-button>order</button></td>
-            </tr>
-            <tr>
-              <td>test data</td>
-              <td>test data</td>
-              <td>test data</td>
-              <td><button md-button>order</button></td>
-            </tr>
-            <tr>
-              <td>test data</td>
-              <td>test data</td>
-              <td>test data</td>
-              <td><button md-button>order</button></td>
+            <tr *ngFor="let record of availableStock">
+              <td>{{record.name}}</td>
+              <td>{{record.volume}}</td>
+              <td>{{record.costPUnit}}</td>
+              <td><button [routerLink]="['/sellStock/'+record.$key]" md-button>order</button></td>
             </tr>
           </tbody>
         </table>
       </md-card-content>
     </md-card>    
-
   </md-tab>
+
+
   <md-tab label="Serving">
-    <md-card>
-      <md-card-title>All incomplete serves</md-card-title>
-      <img md-card-avatar>
-
-      <md-card-content>
-        <md-input-container class="full-width">
-          <input mdInput placeholder="Search">
-        </md-input-container>
-        <table class="table-striped full-width" cellspacing="0">
-          <thead>
-            <tr>
-              <th>table</th>
-              <th>product name</th>
-              <th>total owed</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>test data</td>
-              <td>test data</td>
-              <td>test data</td>
-              <td><button md-button>deliver</button></td>
-            </tr>
-            <tr>
-              <td>test data</td>
-              <td>test data</td>
-              <td>test data</td>
-              <td><button md-button>payment</button></td>
-            </tr>
-            <tr>
-              <td>test data</td>
-              <td>test data</td>
-              <td>test data</td>
-              <td><button md-button>order</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </md-card-content>
-    </md-card>
+    <app-serving></app-serving>
 
   </md-tab>
+
+
   <md-tab label="Completed">
     <md-card>
       <md-card-title>Complete serves</md-card-title>
