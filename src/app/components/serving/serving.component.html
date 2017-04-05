@@ -1,0 +1,28 @@
+<md-card>
+  <md-card-title>All incomplete serves</md-card-title>
+  <img md-card-avatar>
+
+  <md-card-content>
+    <md-input-container class="full-width">
+      <input mdInput placeholder="Search">
+    </md-input-container>
+    <table class="table-striped full-width" cellspacing="0">
+      <thead>
+        <tr>
+          <th>table</th>
+          <th>product name</th>
+          <th>total owed</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of pendingStock">
+          <td>{{record.table}}</td>
+          <td>{{record.name}}</td>
+          <td>{{record.costTotal}}</td>
+          <td><button md-button (click)="upDateStatus(record.status, record.$key)">{{record.status}}</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </md-card-content>
+</md-card>
