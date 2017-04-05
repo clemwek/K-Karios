@@ -1,0 +1,28 @@
+<md-card>
+      <md-card-title>Complete serves</md-card-title>
+      <img md-card-avatar>
+
+      <md-card-content>
+        <md-input-container class="full-width">
+          <input mdInput placeholder="Search">
+        </md-input-container>
+        <table class="table-striped full-width" cellspacing="0">
+          <thead>
+            <tr>
+              <th>product name</th>
+              <th>table</th>
+              <th>Volume</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let record of complete">
+              <td>{{record.name}}</td>
+              <td>{{record.table}}</td>
+              <td>{{record.volume}}</td>
+              <td>{{record.costTotal}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </md-card-content>
+    </md-card>
