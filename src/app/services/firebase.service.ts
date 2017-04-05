@@ -8,6 +8,9 @@ export class FirebaseService {
   uid: any;
   availableStock: any;
   obj: any;
+  retList: FirebaseListObservable<any>;
+  serve: any;
+  listRet: FirebaseListObservable<any>;
 
   constructor(
     private af: AngularFire
@@ -25,14 +28,41 @@ export class FirebaseService {
 
   getGenView(spec) {
     this.availableStock = this.af.database.list('/views/'+spec) as FirebaseListObservable<any[]>
-
-    // console.log(this.uid);
     return this.availableStock;
   }
+
+  getGenList(spec) {
+    this.listRet = this.af.database.list(spec) as FirebaseListObservable<any[]>
+    return this.listRet;
+  }
+
+  getList(loc) {
+    this.retList = this.af.database.list(loc, { query: {
+       equalTo: this.uid
+    }
+    }) as FirebaseListObservable<any>
+    return this.retList;
+  }
+
 
   getObj(loc) {
     this.obj = this.af.database.object(loc) as FirebaseObjectObservable<any>;
     return this.obj
   }
 
+  makeEntrySet(loc, data) {
+    firebase.database().ref(loc).set(data);
+  }
+
+  makeEntryPush(loc, data) {
+    firebase.database().ref(loc).push(data);
+  }
+
+  updateData(loc, data) {
+    firebase.database().ref(loc).update(data);
+  }
+
+  delObj(loc) {
+    firebase.database().ref(loc).remove();
+  }
 }
