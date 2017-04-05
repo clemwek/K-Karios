@@ -15,6 +15,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { StaffComponent } from './components/staff/staff.component';
 import { SellStockComponent } from './components/sell-stock/sell-stock.component';
+import { ServingComponent } from './components/serving/serving.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyCo98tJwrDrL6Zu1QIWf0NBb-klowGVnMs",
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
     HomeComponent,
     NavbarComponent,
     StaffComponent,
-    SellStockComponent
+    SellStockComponent,
+    ServingComponent
   ],
   imports: [
     BrowserModule,
