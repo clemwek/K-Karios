@@ -1,3 +1,15 @@
-<p>
-  sell-stock works!
-</p>
+<app-navbar></app-navbar>
+<md-card>
+  <md-card-title>Fill the form below</md-card-title>
+  <md-card-content>
+    <form (submit)="submitOrder()">
+      <md-input-container>
+        <input mdInput placeholder="Table" [(ngModel)]="tableName" name="tableName">
+      </md-input-container>
+      <md-input-container>
+        <input mdInput placeholder="volume" [(ngModel)]="volume" name="volume">
+      </md-input-container>
+      <button md-button>Click me!</button>
+    </form>
+  </md-card-content>
+</md-card>
