@@ -10,6 +10,7 @@ import 'hammerjs';
 
 import { FirebaseService } from './services/firebase.service';
 import { DateTimeService } from './services/date-time.service';
+import { UserService } from './services/user.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -17,6 +18,9 @@ import { StaffComponent } from './components/staff/staff.component';
 import { SellStockComponent } from './components/sell-stock/sell-stock.component';
 import { ServingComponent } from './components/serving/serving.component';
 import { CompleteComponent } from './components/complete/complete.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { AddProductComponent } from './components/add-product/add-product.component';
+import { EditStockInComponent } from './components/edit-stock-in/edit-stock-in.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyCo98tJwrDrL6Zu1QIWf0NBb-klowGVnMs",
@@ -34,7 +38,9 @@ export const firebaseConfig = {
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'staff', component: StaffComponent},
-  { path: 'sellStock/:id', component: SellStockComponent }
+  { path: 'sellStock/:id', component: SellStockComponent },
+  { path: 'admin', component: AdminComponent },
+  { path: 'admin/addProduct', component: AddProductComponent }
 ]
 
 @NgModule({
@@ -45,7 +51,10 @@ const appRoutes: Routes = [
     StaffComponent,
     SellStockComponent,
     ServingComponent,
-    CompleteComponent
+    CompleteComponent,
+    AdminComponent,
+    AddProductComponent,
+    EditStockInComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +67,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     FirebaseService,
-    DateTimeService
+    DateTimeService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
