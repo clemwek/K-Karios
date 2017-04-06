@@ -16,8 +16,12 @@ export class CompleteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.firebaseService.getList('/record/complete/'+this.dateService.formatDateString()+'/').subscribe(complete => {
-      console.log(complete);
+    // this.firebaseService.getList('/record/complete/'+this.dateService.formatDateString()+'/').subscribe(complete => {
+    //   console.log(complete);
+    //   this.complete = complete;
+    // });
+
+    this.firebaseService.getList('/record/complete/'+this.dateService.formatDateString()).subscribe(complete => {
       this.complete = complete;
     });
   }
