@@ -18,8 +18,7 @@ export class ServingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.firebaseService.getList('/record/pendingServe/'+this.dateService.formatDateString()+'/').subscribe(pendingStock => {
-      console.log(pendingStock);
+    this.firebaseService.getList('/record/pendingServe/'+this.dateService.formatDateString()).subscribe(pendingStock => {
       this.pendingStock = pendingStock;
     });
   }
