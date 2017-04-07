@@ -1,0 +1,32 @@
+<md-card>
+  <md-card-title>
+    Staff Breake down
+  </md-card-title>
+  <img md-card-avatar>
+
+  <md-card-content>
+    <md-input-container class="full-width">
+      <input mdInput placeholder="Search">
+    </md-input-container>
+    <table class="table-striped full-width" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Staff Name</th>
+          <th>Date</th>
+          <th>Product name</th>
+          <th>Products Sold</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of userProdList">
+          <td>{{record.uid}}</td>
+          <td>{{selectDate}}</td>
+          <td>{{record.name}}</td>
+          <td>{{record.costTotal/record.costPUnit}}</td>
+          <td>{{record.costTotal}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </md-card-content>
+</md-card> 
