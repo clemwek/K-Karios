@@ -1,0 +1,36 @@
+<md-card>
+  <md-card-title>
+    Stock Breakdown
+  </md-card-title>
+  <img md-card-avatar>
+
+  <md-card-content>
+    <md-input-container class="full-width">
+      <input mdInput placeholder="Search">
+    </md-input-container>
+    <table class="table-striped full-width" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Balance Volume</th>
+          <th>Balance Cost</th>
+          <th>StockOut Volume</th>
+          <th>StockOut Cost</th>
+          <th>StockIn Volume</th>
+          <th>StockIn Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of stockStatus">
+          <td>{{record.name}}</td>
+          <td>{{record.balVol}}</td>
+          <td>{{record.balCost}}</td>
+          <td>{{record.outVol}}</td>
+          <td>{{record.outCost}}</td>
+          <td>{{record.inVol}}</td>
+          <td>{{record.inCost}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </md-card-content>
+</md-card> 
