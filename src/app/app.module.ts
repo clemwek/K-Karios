@@ -21,6 +21,8 @@ import { CompleteComponent } from './components/complete/complete.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { EditStockInComponent } from './components/edit-stock-in/edit-stock-in.component';
+import { StaffBreakdownComponent } from './components/staff-breakdown/staff-breakdown.component';
+import { StockBreakdownComponent } from './components/stock-breakdown/stock-breakdown.component';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyCo98tJwrDrL6Zu1QIWf0NBb-klowGVnMs",
@@ -40,7 +42,8 @@ const appRoutes: Routes = [
   { path: 'staff', component: StaffComponent},
   { path: 'sellStock/:id', component: SellStockComponent },
   { path: 'admin', component: AdminComponent },
-  { path: 'admin/addProduct', component: AddProductComponent }
+  { path: 'admin/addProduct', component: AddProductComponent },
+  { path: 'admin/addStock/:id', component: EditStockInComponent }
 ]
 
 @NgModule({
@@ -54,7 +57,9 @@ const appRoutes: Routes = [
     CompleteComponent,
     AdminComponent,
     AddProductComponent,
-    EditStockInComponent
+    EditStockInComponent,
+    StaffBreakdownComponent,
+    StockBreakdownComponent
   ],
   imports: [
     BrowserModule,
