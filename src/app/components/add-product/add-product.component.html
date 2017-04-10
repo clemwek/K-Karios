@@ -1,0 +1,17 @@
+<app-navbar></app-navbar>
+<md-card>
+  <md-card-title>Fill the form below</md-card-title>
+  <md-card-content>
+    <form (submit)="submitOrder()">
+      <md-input-container>
+        <input mdInput placeholder="product name" [(ngModel)]="prodName" name="prodName">
+      </md-input-container>      <md-input-container>
+        <input mdInput placeholder="volume" [(ngModel)]="volume" name="volume">
+      </md-input-container>
+      <md-input-container>
+        <input mdInput placeholder="cost per unit" [(ngModel)]="costPUnit" name="costPUnit">
+      </md-input-container>
+      <button md-button>Add Product</button>
+    </form>
+  </md-card-content>
+</md-card>
