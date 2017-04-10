@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<md-tab-group>
+  <md-tab label="Available Stock">
+    <md-card>
+      <md-card-title>
+        Available Stock
+        <button md-raised-button class="pull-right"
+        [routerLink]="['addProduct']">Add Product</button>
+      </md-card-title>
+      <img md-card-avatar>
+
+      <md-card-content>
+        <md-input-container class="full-width">
+          <input mdInput placeholder="Search">
+        </md-input-container>
+        <table class="table-striped full-width" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Product name</th>
+              <th>Price</th>
+              <th>Available units</th>
+              <th>Add Stock</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let record of availableStock">
+              <td>{{record.name}}</td>
+              <td>{{record.volume}}</td>
+              <td>{{record.costPUnit}}</td>
+              <td><button [routerLink]="['addStock/'+record.$key]" md-button>Add Stock</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </md-card-content>
+    </md-card>    
+  </md-tab>
+
+  <md-tab label="Staff breakdown">
+    <app-staff-breakdown></app-staff-breakdown>
+  </md-tab>
+
+  <md-tab label="Stock Breakdown">
+    <app-stock-breakdown></app-stock-breakdown>
+  </md-tab>
+</md-tab-group>
