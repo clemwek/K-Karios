@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+<md-card>
+  <md-card-title>Fill the form below</md-card-title>
+  <md-card-content>
+    <form (submit)="submitOrder()">
+      <md-input-container>
+        <input mdInput placeholder="product name" [(ngModel)]="prodName" name="prodName" disabled>
+      </md-input-container>      
+      <md-input-container>
+        <input mdInput placeholder="available volume" [(ngModel)]="volume" name="volume" disabled>
+      </md-input-container>     
+      <md-input-container>
+        <input mdInput placeholder="add volume" [(ngModel)]="addVolume" name="addVolume" >
+      </md-input-container>
+      <md-input-container>
+        <input mdInput placeholder="cost per unit" [(ngModel)]="costPUnit" name="costPUnit">
+      </md-input-container>
+      <button md-button>Edit Stock</button>
+    </form>
+  </md-card-content>
+</md-card>
