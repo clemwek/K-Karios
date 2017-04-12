@@ -9,7 +9,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./staff.component.css']
 })
 export class StaffComponent implements OnInit {
-  something: any;
+  searchFilter: string;
   availableStock: any;
   inServed: any;
   pendingStock: any;
