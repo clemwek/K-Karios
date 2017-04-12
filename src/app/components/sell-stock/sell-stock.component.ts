@@ -13,11 +13,14 @@ export class SellStockComponent implements OnInit {
   prodDet: any;
   loc: string;
   recLoc: string;
+  statusLoc: string;
   prod: string;
   data: any;
   tableName: string;
   volume: number;
   uDets: any;
+  balData: any;
+  balYestData: any;
 
 
   constructor(
@@ -29,13 +32,20 @@ export class SellStockComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
+
     this.loc = "/views/staff/"+this.dateService.formatDateString()+"/"+this.firebaseService.uid+"/"+this.id;
-    this.recLoc = "/record/pendingServe/"+this.dateService.formatDateString();
+    this.recLoc = "/record/staff/pendingServe/"+this.dateService.formatDateString();
     this.prod = "/views/availableStock/"+this.id;
+    this.statusLoc = '/views/admin/stockStatus/'+this.dateService.formatDateString()+'/'+this.id;
 
     this.firebaseService.getObj(this.loc).subscribe(uDets => {
       this.uDets = uDets;
     });
+
+    this.firebaseService.getObj('/views/admin/stockStatus/'+this.dateService.formatDateString()+'/'+this.id).subscribe(balData => {
+      this.balData = balData;
+    });
+    
 
     this.firebaseService.getObj(this.prod).subscribe(prodDet => {
       this.prodDet = prodDet;
@@ -64,9 +74,40 @@ export class SellStockComponent implements OnInit {
         uid: this.firebaseService.uid
       };
     }
-    this.firebaseService.makeEntryPush(this.recLoc, this.data);
-    this.firebaseService.makeEntrySet(this.loc, this.data);
-    this.router.navigate(['staff']);
+
+    // if (!this.balData.name) {
+    //   this.firebaseService.getObj('/views/admin/stockStatus/'+this.dateService.formatYestDateString()+'/'+this.id).subscribe(balYestData => {
+    //     this.balYestData = balYestData;
+    //   });
+    // }
+
+    // Make entry to balStatus 
+    // if (this.balData.name) {
+    //   this.balData.balCost += (this.prodDet.costPUnit * this.volume);
+    //   this.balData.balVolume += this.balData.balVolume - this.volume;
+    //   this.balData.inVolume = 0;
+    //   this.balData.inCost = 0;
+    //   this.balData.outVolume += this.volume;
+    //   this.balData.outCost += (this.prodDet.costPUnit * this.volume);
+    // } else {
+    //   this.balData.name = this.id;
+    //   this.balYestData.balCost ? this.balData.balCost = (this.balYestData.balCost - (this.prodDet.costPUnit * this.volume)) : this.balData.balCost = 0 ;
+    //   this.balYestData.balVolume ? this.balData.balVolume = this.balYestData.balVolume - this.volume : this.balData.balVolume= 0;
+    //   this.balData.inVolume = 0;
+    //   this.balData.inCost = 0;
+    //   this.balData.outVolume = this.volume;
+    //   this.balData.outCost = (this.prodDet.costPUnit * this.volume);
+    // }
+    // Update remaining products
+    // if (this.prodDet.volume > this.volume){
+      this.prodDet.volume -= this.volume;
+      console.log(this.prodDet)
+      this.firebaseService.makeEntrySet(this.prod, this.prodDet);
+      // this.firebaseService.makeEntrySet(this.statusLoc, this.balData);
+      this.firebaseService.makeEntryPush(this.recLoc, this.data);
+      this.firebaseService.makeEntrySet(this.loc, this.data);
+      this.router.navigate(['staff']);
+    // }
   }
 
 }
