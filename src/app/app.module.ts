@@ -11,6 +11,7 @@ import 'hammerjs';
 import { FirebaseService } from './services/firebase.service';
 import { DateTimeService } from './services/date-time.service';
 import { UserService } from './services/user.service';
+import { StockService } from './services/stock.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -23,6 +24,7 @@ import { AddProductComponent } from './components/add-product/add-product.compon
 import { EditStockInComponent } from './components/edit-stock-in/edit-stock-in.component';
 import { StaffBreakdownComponent } from './components/staff-breakdown/staff-breakdown.component';
 import { StockBreakdownComponent } from './components/stock-breakdown/stock-breakdown.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyCo98tJwrDrL6Zu1QIWf0NBb-klowGVnMs",
@@ -59,7 +61,8 @@ const appRoutes: Routes = [
     AddProductComponent,
     EditStockInComponent,
     StaffBreakdownComponent,
-    StockBreakdownComponent
+    StockBreakdownComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -73,7 +76,8 @@ const appRoutes: Routes = [
   providers: [
     FirebaseService,
     DateTimeService,
-    UserService
+    UserService,
+    StockService
   ],
   bootstrap: [AppComponent]
 })
