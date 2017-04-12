@@ -8,6 +8,7 @@ import { FirebaseService } from '../../services/firebase.service';
   styleUrls: ['./serving.component.css']
 })
 export class ServingComponent implements OnInit {
+  searchFilter: string;
   inServed: any;
   pendingStock: any;
   obj: any;
@@ -18,22 +19,22 @@ export class ServingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.firebaseService.getList('/record/pendingServe/'+this.dateService.formatDateString()).subscribe(pendingStock => {
+    this.firebaseService.getList('/record/staff/pendingServe/'+this.dateService.formatDateString()).subscribe(pendingStock => {
       this.pendingStock = pendingStock;
     });
   }
 
   upDateStatus(status, key) {
-    this.firebaseService.getObj('/record/pendingServe/'+this.dateService.formatDateString()+'/'+key).subscribe(obj => {
+    this.firebaseService.getObj('/record/staff/pendingServe/'+this.dateService.formatDateString()+'/'+key).subscribe(obj => {
       this.obj = obj;
     });
     if (status == 'deliver') {
       this.obj.status = "pay";
-      this.firebaseService.updateData('/record/pendingServe/'+this.dateService.formatDateString()+'/'+key, this.obj)
+      this.firebaseService.updateData('/record/staff/pendingServe/'+this.dateService.formatDateString()+'/'+key, this.obj)
     } else if (status == 'pay') {
       this.obj.status = "complete";
-      this.firebaseService.makeEntryPush('/record/complete/'+this.dateService.formatDateString(), this.obj)
-      this.firebaseService.delObj('/record/pendingServe/'+this.dateService.formatDateString()+'/'+key)
+      this.firebaseService.makeEntryPush('/record/staff/complete/'+this.dateService.formatDateString(), this.obj)
+      this.firebaseService.delObj('/record/staff/pendingServe/'+this.dateService.formatDateString()+'/'+key)
 
     }
   }
