@@ -23,4 +23,13 @@ export class DateTimeService {
     return this.dateString;
   }
 
+  formatYestDateString() {
+    let date = new Date();
+    date.setDate(date.getDate()-1)
+
+    this.dateString = String((this.date.getMonth() + 1)) + String(this.date.getDate()) + this.date.getFullYear().toString();
+
+    return this.dateString;
+  }
+
 }
