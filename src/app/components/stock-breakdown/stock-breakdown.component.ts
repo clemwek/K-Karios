@@ -19,7 +19,8 @@ export class StockBreakdownComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.firebaseService.getGenView('stockStatus/'+this.selectDate).subscribe(stockStatus => {
+    this.selectDate ? this.selectDate : this.selectDate = this.dateService.formatDateString();
+    this.firebaseService.getGenView('admin/stockStatus/'+this.selectDate).subscribe(stockStatus => {
       this.stockStatus = stockStatus;
     } );
   }
