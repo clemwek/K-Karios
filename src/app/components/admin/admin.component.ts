@@ -9,6 +9,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+  searchFilter: string;
   availableStock: any;
 
   constructor(
