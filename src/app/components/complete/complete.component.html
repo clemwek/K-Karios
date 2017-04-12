@@ -4,7 +4,7 @@
 
       <md-card-content>
         <md-input-container class="full-width">
-          <input mdInput placeholder="Search">
+          <input mdInput placeholder="Search" [(ngModel)]="searchFilter">
         </md-input-container>
         <table class="table-striped full-width" cellspacing="0">
           <thead>
@@ -16,7 +16,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let record of complete">
+            <tr *ngFor="let record of complete | filter:searchFilter">
               <td>{{record.name}}</td>
               <td>{{record.table}}</td>
               <td>{{record.volume}}</td>

@@ -8,6 +8,7 @@ import { FirebaseService } from '../../services/firebase.service';
   styleUrls: ['./complete.component.css']
 })
 export class CompleteComponent implements OnInit {
+  searchFilter: string;
   complete: any;
 
   constructor(
@@ -16,12 +17,7 @@ export class CompleteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.firebaseService.getList('/record/complete/'+this.dateService.formatDateString()+'/').subscribe(complete => {
-    //   console.log(complete);
-    //   this.complete = complete;
-    // });
-
-    this.firebaseService.getList('/record/complete/'+this.dateService.formatDateString()).subscribe(complete => {
+    this.firebaseService.getList('/record/staff/complete/'+this.dateService.formatDateString()).subscribe(complete => {
       this.complete = complete;
     });
   }
