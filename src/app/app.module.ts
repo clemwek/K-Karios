@@ -11,7 +11,6 @@ import 'hammerjs';
 import { FirebaseService } from './services/firebase.service';
 import { DateTimeService } from './services/date-time.service';
 import { UserService } from './services/user.service';
-import { StockService } from './services/stock.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -76,8 +75,7 @@ const appRoutes: Routes = [
   providers: [
     FirebaseService,
     DateTimeService,
-    UserService,
-    StockService
+    UserService
   ],
   bootstrap: [AppComponent]
 })
