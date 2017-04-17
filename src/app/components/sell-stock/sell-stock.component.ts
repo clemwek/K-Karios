@@ -75,6 +75,9 @@ export class SellStockComponent implements OnInit {
       };
     }
 
+    // To Do: Make entry to the balData
+    // To Do: make sure ther is product before selling 
+
     // if (!this.balData.name) {
     //   this.firebaseService.getObj('/views/admin/stockStatus/'+this.dateService.formatYestDateString()+'/'+this.id).subscribe(balYestData => {
     //     this.balYestData = balYestData;
