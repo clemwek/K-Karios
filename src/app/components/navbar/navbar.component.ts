@@ -16,12 +16,10 @@ export class NavbarComponent implements OnInit {
   }
 
   login() {
-    console.log('this is clicked!!!');
     this.af.auth.login();
   }
 
   logout() {
     this.af.auth.logout();
   }
-
 }
