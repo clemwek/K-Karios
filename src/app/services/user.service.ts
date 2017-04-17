@@ -5,4 +5,8 @@ export class UserService {
 
   constructor() { }
 
+  checkUser(id) {
+    console.log(id)
+  }
+
 }
