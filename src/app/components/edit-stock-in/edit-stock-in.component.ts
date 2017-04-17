@@ -31,16 +31,14 @@ export class EditStockInComponent implements OnInit {
       this.prodName = stock.name;
       this.volume = stock.volume;
       this.costPUnit = stock.costPUnit;
-      
-    } ); 
+    }); 
   }
 
     submitOrder() {
-      this.addVolume ?  this.stock.volume += this.addVolume : this.volume;
+      this.addVolume ?  this.stock.volume += Number(this.addVolume) : Number(this.volume);
       this.stock.costPUnit = this.costPUnit;
       // this.firebaseService.makeEntryPush(this.recLoc, this.data);
       this.firebaseService.makeEntrySet('views/availableStock/'+this.id, this.stock);
       this.router.navigate(['admin']);
     }
-
 }
