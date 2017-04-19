@@ -15,6 +15,8 @@ export class EditStockInComponent implements OnInit {
   costPUnit: number;
   id: string;
   addVolume: number;
+  dayBal: any;
+  bal: any;
 
   constructor(
     private firebaseService: FirebaseService,
@@ -31,14 +33,44 @@ export class EditStockInComponent implements OnInit {
       this.prodName = stock.name;
       this.volume = stock.volume;
       this.costPUnit = stock.costPUnit;
-    }); 
+    });
+
+    this.firebaseService.getObj('views/admin/stockBal/'+this.dateService.formatDateString()+'/'+this.prodName).subscribe(dayBal => {
+      this.dayBal = dayBal;
+    });
+
+    this.firebaseService.getObj('views/admin/stockBal/track/'+this.prodName).subscribe(bal => {
+      this.bal = bal;
+    });
   }
 
     submitOrder() {
-      this.addVolume ?  this.stock.volume += Number(this.addVolume) : Number(this.volume);
+      let record = {
+        name: this.prodName,
+        volume: this.volume,
+        costPUnit: this.costPUnit
+      }
+      this.addVolume ?  this.stock.volume = Number(this.stock.volume) + Number(this.addVolume) : Number(this.volume);
       this.stock.costPUnit = this.costPUnit;
-      // this.firebaseService.makeEntryPush(this.recLoc, this.data);
+      
+      if (this.dayBal.name) {
+        this.volume ? this.bal.balVol = Number(this.bal.balVol) + Number(this.addVolume) : false;
+        this.bal.balCost = Number(this.bal.balCost) + (this.costPUnit * this.addVolume);
+        this.addVolume ? this.bal.inVol = Number(this.bal.inVol) + Number(this.addVolume) : false;
+        this.addVolume ? this.bal.inCost = Number(this.bal.inCost) + (this.addVolume * this.costPUnit) : false;
+        this.bal.date = this.dateService.formatDate();
+      } else {
+        this.volume ? this.bal.balVol = Number(this.bal.balVol) + Number(this.addVolume) : false;
+        this.bal.balCost = Number(this.bal.balCost) + (this.costPUnit * this.addVolume);
+        this.addVolume ? this.bal.inVol = Number(this.addVolume) : false;
+        this.addVolume ? this.bal.inCost = (this.addVolume * this.costPUnit) : false;
+        this.bal.date = this.dateService.formatDate();
+      }
+      
+      this.firebaseService.makeEntryPush('record/admin/stockin/'+this.dateService.formatDateString(), record);
       this.firebaseService.makeEntrySet('views/availableStock/'+this.id, this.stock);
+      this.firebaseService.makeEntrySet('views/admin/stockBal/'+this.dateService.formatDateString()+'/'+this.prodName.toLowerCase().trim(), this.bal);
+      this.firebaseService.makeEntrySet('views/admin/stockBal/track/'+this.prodName.toLowerCase().trim(), this.bal);
       this.router.navigate(['admin']);
     }
 }
