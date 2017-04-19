@@ -21,7 +21,8 @@ export class SellStockComponent implements OnInit {
   uDets: any;
   balData: any;
   balYestData: any;
-
+  dayBal: any;
+  bal: any;
 
   constructor(
     private firebaseService: FirebaseService,
@@ -42,11 +43,18 @@ export class SellStockComponent implements OnInit {
       this.uDets = uDets;
     });
 
+    this.firebaseService.getObj('views/admin/stockBal/'+this.dateService.formatDateString()+'/'+this.id).subscribe(dayBal => {
+      this.dayBal = dayBal;
+    });
+
+    this.firebaseService.getObj('views/admin/stockBal/track/'+this.id).subscribe(bal => {
+      this.bal = bal;
+    });
+
     this.firebaseService.getObj('/views/admin/stockStatus/'+this.dateService.formatDateString()+'/'+this.id).subscribe(balData => {
       this.balData = balData;
     });
     
-
     this.firebaseService.getObj(this.prod).subscribe(prodDet => {
       this.prodDet = prodDet;
     });
@@ -75,42 +83,26 @@ export class SellStockComponent implements OnInit {
       };
     }
 
-    // To Do: Make entry to the balData
-    // To Do: make sure ther is product before selling 
+    if (this.dayBal.name) {
+      this.bal.balCost = Number(this.bal.balCost) - (this.volume*this.prodDet.costPUnit);
+      this.bal.balVol = Number(this.bal.balVol) - Number(this.volume);
+      this.bal.outVol = Number(this.bal.outVol) + Number(this.volume);
+      this.bal.outCost = Number(this.bal.outCost) + (this.volume * this.prodDet.costPUnit);
+    } else {
+      this.bal.balCost = Number(this.bal.balCost) - (this.volume*this.prodDet.costPUnit);
+      this.bal.balVol = Number(this.bal.balVol) - Number(this.volume);
+      this.bal.outVol = this.volume;
+      this.bal.outCost = (this.volume * this.prodDet.costPUnit);
+    }
 
-    // if (!this.balData.name) {
-    //   this.firebaseService.getObj('/views/admin/stockStatus/'+this.dateService.formatYestDateString()+'/'+this.id).subscribe(balYestData => {
-    //     this.balYestData = balYestData;
-    //   });
-    // }
+    this.firebaseService.makeEntrySet('views/admin/stockBal/'+this.dateService.formatDateString()+'/'+this.id.toLowerCase().trim(), this.bal);
+    this.firebaseService.makeEntrySet('views/admin/stockBal/track/'+this.id.toLowerCase().trim(), this.bal);
 
-    // Make entry to balStatus 
-    // if (this.balData.name) {
-    //   this.balData.balCost += (this.prodDet.costPUnit * this.volume);
-    //   this.balData.balVolume += this.balData.balVolume - this.volume;
-    //   this.balData.inVolume = 0;
-    //   this.balData.inCost = 0;
-    //   this.balData.outVolume += this.volume;
-    //   this.balData.outCost += (this.prodDet.costPUnit * this.volume);
-    // } else {
-    //   this.balData.name = this.id;
-    //   this.balYestData.balCost ? this.balData.balCost = (this.balYestData.balCost - (this.prodDet.costPUnit * this.volume)) : this.balData.balCost = 0 ;
-    //   this.balYestData.balVolume ? this.balData.balVolume = this.balYestData.balVolume - this.volume : this.balData.balVolume= 0;
-    //   this.balData.inVolume = 0;
-    //   this.balData.inCost = 0;
-    //   this.balData.outVolume = this.volume;
-    //   this.balData.outCost = (this.prodDet.costPUnit * this.volume);
-    // }
-    // Update remaining products
-    // if (this.prodDet.volume > this.volume){
-      this.prodDet.volume -= this.volume;
-      console.log(this.prodDet)
-      this.firebaseService.makeEntrySet(this.prod, this.prodDet);
-      // this.firebaseService.makeEntrySet(this.statusLoc, this.balData);
-      this.firebaseService.makeEntryPush(this.recLoc, this.data);
-      this.firebaseService.makeEntrySet(this.loc, this.data);
-      this.router.navigate(['staff']);
-    // }
+    this.prodDet.volume -= this.volume;
+    this.firebaseService.makeEntrySet(this.prod, this.prodDet);
+    
+    this.firebaseService.makeEntryPush(this.recLoc, this.data);
+    this.firebaseService.makeEntrySet(this.loc, this.data);
+    this.router.navigate(['staff']);
   }
-
 }
