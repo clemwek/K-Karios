@@ -5,7 +5,7 @@
       <md-card-title>
         Available Stock
         <button md-raised-button class="pull-right"
-        [routerLink]="['addProduct']">Add Product</button>
+        (click)="showForm()">Add Product</button>
       </md-card-title>
       <img md-card-avatar>
 
@@ -13,6 +13,23 @@
         <md-input-container class="full-width">
           <input mdInput placeholder="Search" [(ngModel)]="searchFilter">
         </md-input-container>
+        <br/>
+        <md-card *ngIf="addProd">
+          <div class="full-width">
+            <form (submit)="submitOrder()">
+              <md-input-container>
+                <input mdInput placeholder="product name" [(ngModel)]="searchFilter" name="searchFilter">
+              </md-input-container>      <md-input-container>
+                <input mdInput placeholder="volume" [(ngModel)]="volume" name="volume">
+              </md-input-container>
+              <md-input-container>
+                <input mdInput placeholder="cost per unit" [(ngModel)]="costPUnit" name="costPUnit">
+              </md-input-container>
+              <button md-button>Add Product</button>
+            </form>
+          </div>
+        </md-card>
+        <br/>
         <table class="table-striped full-width" cellspacing="0">
           <thead>
             <tr>
